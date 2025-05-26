@@ -45,9 +45,9 @@ export default function DataKonsolAdminPages() {
                         <div className="content-fluid px-4">
                             <h1>Data Konsol</h1>
                             <div className="card-body">
-                                <h2><Link to={'/tambah_data_konsol_admin'} className="btn btn-primary">Tambah data konsol</Link></h2>
+                                <h2><Link to={'/admin/tambah_data_konsol_admin'} className="btn btn-primary">Tambah data konsol</Link></h2>
                                 <div className="table-responsive">
-                                    <table className="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0">
                                         <thead>
                                             <tr>
                                                 <th>Gambar</th>
@@ -76,7 +76,7 @@ export default function DataKonsolAdminPages() {
                                                     <td><img src={`http://127.0.0.1:8000/images/${konsol.image}`} alt="" width="100" /></td>
                                                     <td>{konsol.name}</td>
                                                     <td>{konsol.description}</td>
-                                                    <td>{konsol.hourly_rate}</td>
+                                                    <td>Rp. {konsol.hourly_rate}</td>
                                                     <td>{konsol.is_active}</td>
                                                     <td>
                                                         <Link to={`/admin/ubahdatakonsol/${konsol.id_konsol}`} className="btn btn-primary">Edit</Link>

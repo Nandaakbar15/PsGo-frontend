@@ -26,14 +26,14 @@ export default function Sidebar() {
                 </div>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to="/datauser">
+                    <Link className="nav-link" to="/admin/data_user_admin">
                         <i className="fas fa-fw fa-cog"></i>
                         <span>Data User</span>
                     </Link>
                 </li>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to="/data_konsol_admin">
+                    <Link className="nav-link" to="/admin/data_konsol_admin">
                         <i className="fas fa-fw fa-table"></i>
                         <span>Data Konsol</span>
                     </Link>

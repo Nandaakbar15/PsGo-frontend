@@ -29,7 +29,23 @@ export function BtnRegister() {
 export function BtnAdd() {
     return (
         <div className="button-add">
-            <button className="btn btn-primary">Tambah!</button>
+            <button className="btn btn-primary" type="submit">Tambah!</button>
+        </div>
+    );
+}
+
+export function BtnChange() {
+    return (
+        <div className="button-add">
+            <button className="btn btn-info" type="submit">Ubah!</button>
+        </div>
+    );
+}
+
+export function BtnBack() {
+    return (
+        <div className="button-back">
+            <button className="btn btn-success">Kembali</button>
         </div>
     );
 }
