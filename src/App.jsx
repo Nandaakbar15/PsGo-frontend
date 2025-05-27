@@ -7,6 +7,7 @@ import DataKonsolAdminPages from './pages/Admin/DataKonsol/indexconsole'
 import TambahConsole from './pages/Admin/DataKonsol/TambahConsole'
 import DataUserAdmin from './pages/Admin/DataUser/indexuser'
 import UbahDataKonsolAdmin from './pages/Admin/DataKonsol/UbahConsole'
+import DataAksesorisAdmin from './pages/Admin/Data/IndexAksesoris'
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path='/admin/data_konsol_admin' element={<DataKonsolAdminPages/>}></Route>
         <Route path='/admin/tambah_data_konsol_admin' element={<TambahConsole/>}></Route>
         <Route path='/admin/ubahdatakonsol/:id_konsol' element={<UbahDataKonsolAdmin/>}></Route>
+        <Route path='/admin/data_aksesoris_admin' element={<DataAksesorisAdmin/>}></Route>
       </Routes>
     </BrowserRouter>
   )

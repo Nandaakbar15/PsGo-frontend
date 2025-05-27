@@ -40,6 +40,13 @@ export default function Sidebar() {
                 </li>
 
                 <li className="nav-item">
+                    <Link className="nav-link" to="/admin/data_aksesoris_admin">
+                        <i className="fas fa-fw fa-table"></i>
+                        <span>Data Aksesoris</span>
+                    </Link>
+                </li>
+
+                <li className="nav-item">
                     <Link className="nav-link" to="/datatransaksi" aria-expanded="true" aria-controls="collapsePages">
                         <i className="fas fa-fw fa-folder"></i>
                         <span>Data Transaksi</span>

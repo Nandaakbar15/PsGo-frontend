@@ -35,3 +35,8 @@
 
 - Data Konsol
 ![Data Konsol](./docs/Data%20Konsol.png)
+
+<br>
+
+- Data Aksesoris
+![Data Aksesoris](./docs/Data%20Aksesoris.png)
