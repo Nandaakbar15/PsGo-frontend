@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
-import axios from 'axios';
 import NavBarAdmin from "../../components/NavBarAdmin";
 import Sidebar from "../../components/Sidebar";
 import PagesTitle from "../../components/PagesTitle";

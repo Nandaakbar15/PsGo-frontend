@@ -2,10 +2,16 @@ import React, { useEffect, useState } from "react";
 import NavBarAdmin from "../../../components/NavBarAdmin";
 import Sidebar from "../../../components/Sidebar";
 import axios from "axios";
-import { Link } from "react-router";
+import { Link} from "react-router";
+import { BtnDelete } from "../../../components/Button";
+import Modal from "../../../components/Modal";
+import PagesTitle from "../../../components/PagesTitle";
+
 
 export default function DataAksesorisAdmin() {
     const [aksesoris, setAksesoris] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [message, setMessage] = useState("");
 
     const getAllAksesoris = async() => {
         try {
@@ -22,6 +28,32 @@ export default function DataAksesorisAdmin() {
         }
     }
 
+    const deleteAksesoris = async(id_aksesoris) => {
+        try {
+            const token = localStorage.getItem("token");
+            const response = await axios.delete(`http://127.0.0.1:8000/api/admin/deleteaccesories/${id_aksesoris}`, {
+                headers: {
+                    'Authorization' : `Bearer ${token}`
+                }
+            });
+
+            setShowModal(true);
+            setMessage(response.data.message);
+
+            // refresh the data
+            getAllAksesoris();
+
+            setTimeout(() => {
+                setShowModal(false);
+            }, 2000);
+            
+        } catch(error) {
+            console.error("Error : ", error);
+            setShowModal(true);
+            setMessage("Gagal Menghapus data!");
+        }
+    }
+
 
     useEffect(() => {
         getAllAksesoris();
@@ -29,6 +61,7 @@ export default function DataAksesorisAdmin() {
 
     return (
         <>
+            <PagesTitle title={'Data Aksesoris Admin'}/>
             <div id="wrapper">
                 <Sidebar/>
                 <div id="content-wrapper" className="d-flex flex-column">
@@ -37,8 +70,8 @@ export default function DataAksesorisAdmin() {
                         <h1>Data Aksesoris</h1>
 
                         <h2><Link to={'/admin/tambah_data_aksesoris'} className="btn btn-primary">Tambah data aksesoris</Link></h2>
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <div className="table-responsive">
+                            <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0">
                                 <thead>
                                     <tr>
                                         <th>Gambar</th>
@@ -70,10 +103,10 @@ export default function DataAksesorisAdmin() {
                                             <td>{data.stok}</td>
                                             <td>Rp. {data.harga}</td>
                                             <td>
-                                                <Link to={`/admin/ubahdatakonsol/${data.id_aksesoris}`} className="btn btn-primary">Edit</Link>
+                                                <Link to={`/admin/ubah_data_aksesoris/${data.id_aksesoris}`} className="btn btn-primary">Edit</Link>
                                             </td>
                                             <td>
-                                                <button type="submit" className="btn btn-danger">Hapus!</button>
+                                                <BtnDelete onClick={() => deleteAksesoris(data.id_aksesoris)}/>
                                             </td>
                                         </tr>
                                     )))}
@@ -82,6 +115,7 @@ export default function DataAksesorisAdmin() {
                         </div>
                     </div>
                 </div>
+                {showModal && <Modal show={showModal} onClose={() => setShowModal(false)} message={message} />}
             </div>
         </>
     );

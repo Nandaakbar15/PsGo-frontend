@@ -3,8 +3,8 @@
 **PsGo merupakan aplikasi atau website yang mengelola rental dan penyewaan Playstation**
 
 ### Main Feature
-- Admin : CRUD Data konsol, lihat data user yang logini dan lihat transaksi masuk.
-- Customer : Lihat list konsol dan booking atau sewa PS.
+- Admin : CRUD Data konsol, CRUD Data Aksesoris, lihat data user yang logini dan lihat transaksi masuk.
+- Customer : Lihat list konsol, list aksesoris dan booking atau sewa PS.
 
 ### Tech Stack
 - React Js

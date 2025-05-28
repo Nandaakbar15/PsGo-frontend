@@ -42,6 +42,14 @@ export function BtnChange() {
     );
 }
 
+export function BtnDelete({onClick}) {
+    return (
+        <div className="button-delete">
+            <button className="btn btn-danger" onClick={onClick}>Hapus!</button>
+        </div>
+    );
+}
+
 export function BtnBack() {
     return (
         <div className="button-back">

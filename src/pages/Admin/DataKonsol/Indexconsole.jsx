@@ -1,18 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 
 import axios from "axios";
-import { useNavigate } from "react-router";
 import NavBarAdmin from "../../../components/NavBarAdmin";
 import Sidebar from "../../../components/Sidebar";
 import PagesTitle from "../../../components/PagesTitle";
+import Modal from "../../../components/Modal";
+import { BtnDelete } from "../../../components/Button";
 
 export default function DataKonsolAdminPages() {
-
     const [console, setConsole] = useState([]);
-    const navigate = useNavigate("");
+    const [showModal, setShowModal] = useState(false);
+    const [message, setMessage] = useState("");
 
     const getAllConsole = async() => {
         try {
@@ -28,10 +28,34 @@ export default function DataKonsolAdminPages() {
         }
     }
 
+    const deleteConsole = async(id_konsol) => {
+        try {
+            const token = localStorage.getItem("token");
+            const response = await axios.delete(`http://127.0.0.1:8000/api/admin/deleteconsoles/${id_konsol}`, {
+                headers: {
+                    "Authorization" : `Bearer ${token}`
+                }
+            });
+
+            setShowModal(true);
+            setMessage(response.data.message);
+
+            // refresh the data
+            getAllConsole();
+
+            setTimeout(() => {
+                setShowModal(false);
+            });
+        } catch(error) {
+            console.error("Error : ", error);
+            setShowModal(true);
+            setMessage("Error! Gagal menghapus data!");
+        }
+    }
+
     useEffect(() => {
         getAllConsole()
     }, []);
-
 
 
     return (
@@ -82,7 +106,7 @@ export default function DataKonsolAdminPages() {
                                                         <Link to={`/admin/ubahdatakonsol/${konsol.id_konsol}`} className="btn btn-primary">Edit</Link>
                                                     </td>
                                                     <td>
-                                                        <button className="btn btn-danger">Hapus</button>
+                                                        <BtnDelete onClick={() => deleteConsole(konsol.id_konsol)}/>
                                                     </td>
                                                 </tr>
                                             ))}
@@ -93,6 +117,7 @@ export default function DataKonsolAdminPages() {
                         </div>
                     </div>
                 </div>
+                {showModal && <Modal show={showModal} onClose={() => setShowModal(false)} message={message} />}
             </div>
         </>
     );

@@ -4,7 +4,7 @@ import NavBarAdmin from '../../../components/NavBarAdmin'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router'
 import PagesTitle from '../../../components/PagesTitle';
-import { BtnAdd } from '../../../components/Button'
+import { BtnAdd, BtnBack } from '../../../components/Button'
 import Modal from '../../../components/Modal'
 
 export default function TambahConsole() {
@@ -54,7 +54,7 @@ export default function TambahConsole() {
         setTimeout(() => {
             setShowModal(false);
             navigate("/admin/data_konsol_admin");
-        }, 2000)
+        }, 2000);
     } catch(error) {
         console.error("Error : ", error);
         setMessage("Error! Could not add the data!");
@@ -98,7 +98,13 @@ export default function TambahConsole() {
                                     <label htmlFor="image" className='form-label'>Gambar Konsol</label>
                                     <input type="file" className='form-control' name='image' id='image' placeholder='masukan gambar' onChange={(e) => setiImage(e.target.files[0])}/>
                                 </div>
-                                <BtnAdd/>
+                                <div className="mb-3">
+                                    <BtnAdd/>
+                                </div>
+
+                                <Link to={'/admin/data_konsol_admin'}>
+                                    <BtnBack/>
+                                </Link>
                             </form>
                         </div>
                     </div>
