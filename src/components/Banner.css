@@ -1,0 +1,24 @@
+/* Banner Styles */
+.banner {
+    background: linear-gradient(to bottom, #0f172a, #1e293b);
+    padding: 60px 20px;
+    color: white;
+    text-align: center;
+    background-image: url("/images/playstationbanner.jpg"); /* atau dari props */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.banner-content h2 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.banner-content p {
+    color: white;
+    font-weight: bold;
+    text-shadow: 2px 2px #ff0000;
+    font-size: 18px;
+    margin-top: 10px;
+}

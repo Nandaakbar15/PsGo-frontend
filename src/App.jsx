@@ -10,6 +10,11 @@ import UbahDataKonsolAdmin from './pages/Admin/DataKonsol/UbahConsole'
 import DataAksesorisAdmin from './pages/Admin/DataAksesoris/IndexAksesoris'
 import FormTambahAksesoris from './pages/Admin/DataAksesoris/TambahAksesoris'
 import FormUbahAksesoris from './pages/Admin/DataAksesoris/UbahAksesoris'
+import DashboardCustomerPages from './pages/Customer/DashboardCustomer'
+import ProductsPages from './pages/Customer/Produk'
+import AksesorisPages from './pages/Customer/Aksesoris'
+import DetailProdukPages from './pages/Customer/DetailProduk'
+import DetailAksesorisPages from './pages/Customer/DetailAksesoris'
 
 
 function App() {
@@ -28,6 +33,11 @@ function App() {
         <Route path='/admin/data_aksesoris_admin' element={<DataAksesorisAdmin/>}></Route>
         <Route path='/admin/tambah_data_aksesoris' element={<FormTambahAksesoris/>}></Route>
         <Route path='/admin/ubah_data_aksesoris/:id_aksesoris' element={<FormUbahAksesoris/>}></Route>
+        <Route path='/dashboardcustomer' element={<DashboardCustomerPages/>}></Route>
+        <Route path='/customer/produk' element={<ProductsPages/>}></Route>
+        <Route path='/customer/aksesoris' element={<AksesorisPages/>}></Route>
+        <Route path='/detailproduct/:id_konsol' element={<DetailProdukPages/>}></Route>
+        <Route path='/detailaksesoris/:id_aksesoris' element={<DetailAksesorisPages/>}></Route>
       </Routes>
     </BrowserRouter>
   )
