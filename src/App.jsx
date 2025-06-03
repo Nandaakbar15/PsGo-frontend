@@ -15,6 +15,7 @@ import ProductsPages from './pages/Customer/Produk'
 import AksesorisPages from './pages/Customer/Aksesoris'
 import DetailProdukPages from './pages/Customer/DetailProduk'
 import DetailAksesorisPages from './pages/Customer/DetailAksesoris'
+import ProfilPages from './pages/Customer/Profil'
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Route path='/admin/tambah_data_aksesoris' element={<FormTambahAksesoris/>}></Route>
         <Route path='/admin/ubah_data_aksesoris/:id_aksesoris' element={<FormUbahAksesoris/>}></Route>
         <Route path='/dashboardcustomer' element={<DashboardCustomerPages/>}></Route>
+        <Route path='/customer/akun' element={<ProfilPages/>}></Route>
         <Route path='/customer/produk' element={<ProductsPages/>}></Route>
         <Route path='/customer/aksesoris' element={<AksesorisPages/>}></Route>
         <Route path='/detailproduct/:id_konsol' element={<DetailProdukPages/>}></Route>

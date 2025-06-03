@@ -7,22 +7,29 @@ import { BtnDelete } from "../../../components/Button";
 import Modal from "../../../components/Modal";
 import PagesTitle from "../../../components/PagesTitle";
 
-
 export default function DataAksesorisAdmin() {
     const [aksesoris, setAksesoris] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [message, setMessage] = useState("");
+    const [pagination, setPaginations] = useState({
+        current_page: 1,
+        last_page: 1,
+    });
 
-    const getAllAksesoris = async() => {
+    const getAllAksesoris = async(page = 1) => {
         try {
             const token = localStorage.getItem("token");
-            const response = await axios.get("http://127.0.0.1:8000/api/admin/getallaccesories", {
+            const response = await axios.get(`http://127.0.0.1:8000/api/admin/getallaccesories?page=${page}`, {
                 headers: {
                     'Authorization' : `Bearer ${token}`
                 }
             });
 
-            setAksesoris(Object.values(response.data.data));
+            setAksesoris(response.data.data.data);
+            setPaginations({
+                current_page: response.data.data.current_page,
+                last_page: response.data.data.last_page
+            });
         } catch(error) {
             console.error("Error : ", error);
         }
@@ -112,6 +119,22 @@ export default function DataAksesorisAdmin() {
                                     )))}
                                 </tbody>
                             </table>
+                        </div>
+                        <div className="d-flex justify-content-center">
+                            <button 
+                                className="btn btn-outline-primary mx-2"
+                                disabled={pagination.current_page === 1}
+                                onClick={() => getAllAksesoris(pagination.current_page - 1)}
+                            >
+                                Previous
+                            </button>
+                            <button 
+                                className="btn btn-outline-primary mx-2"
+                                disabled={pagination.current_page === pagination.last_page}
+                                    nClick={() => getAllAksesoris(pagination.current_page + 1)}
+                            >
+                                Next
+                            </button>
                         </div>
                     </div>
                 </div>
