@@ -64,8 +64,8 @@ export default function DataUserAdmin() {
                     <div className="content-fluid px-4">
                         <h1>Data User</h1>
                         <div className="table-responsive">
-                           <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellSpacing="0">
+                           <div className="table-responsive">
+                                <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0">
                                     <thead>
                                         <tr>
                                             <th>Username</th>

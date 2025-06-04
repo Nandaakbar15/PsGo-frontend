@@ -5,8 +5,7 @@ import { Link, useNavigate } from 'react-router';
 import PagesTitle from '../components/PagesTitle';
 
 export default function RegisterPage() {
-
-  const [name, setName] = useState("");
+  const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");  
   const [message, setMessage] = useState("");
@@ -17,7 +16,7 @@ export default function RegisterPage() {
     try {
         e.preventDefault();
         const response = await axios.post("http://127.0.0.1:8000/api/register", {
-            name: name,
+            username: username,
             email: email,
             password: password
         });
@@ -48,7 +47,7 @@ export default function RegisterPage() {
 
                             <div className="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
                                 <label htmlFor="name">Username</label>
-								<input className="input100" type="text" name="name" id='name' placeholder="name" onChange={(e) => setName(e.target.value)}/>
+								<input className="input100" type="text" name="username" id='username' placeholder="username" onChange={(e) => setUserName(e.target.value)}/>
 								<span className="focus-input100"></span>
 							</div>
 

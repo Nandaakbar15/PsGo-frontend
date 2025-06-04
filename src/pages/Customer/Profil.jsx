@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import PagesTitle from "../../components/PagesTitle";
 import CustomerNavbar from "../../components/NavBarCustomer";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 export default function ProfilPages() {
     const [user, setUser] = useState(null);
+    const navigate = useNavigate();
 
     const getUsers = async() => {
         try {
@@ -16,6 +17,28 @@ export default function ProfilPages() {
                 }
             });
             setUser(response.data);
+        } catch(error) {
+            console.error("Error : ", error);
+        }
+    }
+
+    const logout = async() => {
+        try {
+            const token = localStorage.getItem("token");
+
+            if(!token) {
+                console.warn("Tidak ada token!");
+                return
+            }
+
+            await axios.post("http://127.0.0.1:8000/api/logout", null, {
+                headers: {
+                    Authorization : `Bearer ${token}`
+                }
+            });
+            
+            localStorage.removeItem("token") // hapus token
+            navigate("/login");
         } catch(error) {
             console.error("Error : ", error);
         }
@@ -41,8 +64,8 @@ export default function ProfilPages() {
                                 <div className="card shadow-sm">
                                     <div className="card-body text-center">
                                         <img src="https://via.placeholder.com/150" alt="Profile Image" className="profile-img mb-3" />
-                                        <h4 className="card-title">{user.name}</h4>
-                                        <p className="card-text">Selamat datang kembali, {user.name}! Ini adalah halaman profil kamu.</p>
+                                        <h4 className="card-title">{user.username}</h4>
+                                        <p className="card-text">Selamat datang kembali, {user.username}! Ini adalah halaman profil kamu.</p>
                                         <hr/>
                                         <ul className="list-group list-group-flush text-start">
                                             <li className="list-group-item"><strong>Email: </strong> {user.email}</li>
@@ -54,9 +77,9 @@ export default function ProfilPages() {
                                     </div>
                                 </div>
                             </div>
-                            <Link to={'/login'} className="justify-center m">
-                                <button className="btn btn-danger">Logout</button>
-                            </Link>
+                            <div className="justify-center m">
+                                <button className="btn btn-danger" onClick={logout}>Logout</button>
+                            </div>
                         </div>
                     </div>
                 </div>

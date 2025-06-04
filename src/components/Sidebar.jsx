@@ -1,7 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router'
+import axios from 'axios';
 
 export default function Sidebar() {
+  const [user, setUser] = useState([]);
+  
+  const getUser = async() => {
+    try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get('http://127.0.0.1:8000/api/user', {
+            headers: {
+                Authorization : `Bearer ${token}`
+            }
+        });
+        setUser(response.data);
+    } catch(error) {
+        console.error("Error : ", error);
+    }
+  }
+
+  useEffect(() => {
+    getUser();
+  }, [])
+
   return (
     <>
         <div>
@@ -47,6 +68,13 @@ export default function Sidebar() {
                 </li>
 
                 <li className="nav-item">
+                    <Link className="nav-link" to="/admin/data_booking_admin" aria-expanded="true" aria-controls="collapsePages">
+                        <i className="fas fa-fw fa-folder"></i>
+                        <span>Data Booking</span>
+                    </Link>
+                </li>
+
+                <li className="nav-item">
                     <Link className="nav-link" to="/datatransaksi" aria-expanded="true" aria-controls="collapsePages">
                         <i className="fas fa-fw fa-folder"></i>
                         <span>Data Transaksi</span>
@@ -54,7 +82,9 @@ export default function Sidebar() {
                 </li>
 
                 <hr className="sidebar-divider d-none d-md-block" />
-
+                <div className="text-center d-none d-md-inline">
+                    <p className='text-white'>Login as : <br />{user.username}</p>
+                </div>
             </ul>
         </div>
     </>
