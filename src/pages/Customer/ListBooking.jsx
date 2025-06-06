@@ -1,10 +1,16 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import PagesTitle from "../../components/PagesTitle";
 import CustomerNavbar from "../../components/NavBarCustomer";
 import axios from "axios";
+import { useParams } from "react-router";
+import { BtnCancel } from "../../components/Button";
 
 export default function ListBookingPages() {
     const [bookings, setBookings] = useState([]);
+    const {id_booking} = useParams();
+    const [showModal, setShowModal] = useState(false);
+    const [message, setMessage] = useState("");
 
     const getListBookings = async() => {
         try {
@@ -21,6 +27,29 @@ export default function ListBookingPages() {
             setBookings(response.data.data);
         } catch(error) {
             console.error("Error : ", error);
+        }
+    }
+
+    const cancelBooking = async() => {
+        try {
+            const token = localStorage.token("token");
+            const response = await axios.delete(`http://127.0.0.1:8000/api/customer/cancel-booking/${id_booking}`, {
+                headers: {
+                    Authorization : `Bearer ${token}`
+                }
+            });
+
+            setShowModal(true);
+            setMessage(response.data.message);
+
+            // refresh the data
+            getListBookings();
+
+            setTimeout(() => {
+                setShowModal(false);
+            }, 2000);
+        } catch(error) {
+            console.error("Error");
         }
     }
 
@@ -64,7 +93,10 @@ export default function ListBookingPages() {
                                         Status: {booking.status}
                                         </small>
                                     </p>
+
+                                    <BtnCancel onClick={() => cancelBooking(booking.id_booking)}/>
                                 </div>
+                                {showModal && <Modal show={showModal} onClose={() => setShowModal(false)} message={message} />}
                             </div>
                         </div>
                     </div>

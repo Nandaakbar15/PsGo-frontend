@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import Modal from './Modal';
 
 export default function CardsAccesories() {
   const [accesories, setAccesories] = useState([]);
@@ -8,6 +9,9 @@ export default function CardsAccesories() {
     current_page: 1,
     last_page: 1
   });
+  const [showModal, setShowModal] = useState(false);
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const getAllAccessories = async(page = 1) => {
     try { 
@@ -29,6 +33,39 @@ export default function CardsAccesories() {
       console.error("Error : ", error);
     }
   }
+
+  const handleOrder = async (aksesoris) => {
+    const token = localStorage.getItem("token");
+    const quantity = 1; // default sementara
+    const jumlah_pembayaran = aksesoris.harga * quantity;
+    const status = "Pending"; // status default
+
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/api/customer/order', {
+        id_aksesoris: aksesoris.id_aksesoris,
+        quantity: quantity,
+        jumlah_pembayaran: jumlah_pembayaran,
+        status: status
+      }, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      setShowModal(true);
+      setMessage(response.data.message);
+
+      setTimeout(() => {
+        setShowModal(false);
+        navigate('/customer/order');
+      });
+
+    } catch (error) {
+      console.error("Gagal membuat pesanan: ", error);
+      setShowModal(true);
+      setMessage("Gagal membuat pesanan!");
+    }
+  };
 
   useEffect(() => {
     getAllAccessories();
@@ -53,7 +90,7 @@ export default function CardsAccesories() {
                   <h5 className="card-title">{aksesoris.nama_aksesoris}</h5>
                   <p className="card-text">Harga: Rp. {aksesoris.harga}</p>
                   <p className="card-text">Stok: {aksesoris.stok}</p>
-                  <Link to="/customer/order" className="btn btn-primary w-100">Pesan</Link>
+                  <button className='btn btn-success w-100' onClick={() => handleOrder(aksesoris)}>Pesan!</button>
                 </div>
               </div>
             </div>
@@ -76,6 +113,7 @@ export default function CardsAccesories() {
           >
             Next
           </button>
+          {showModal && <Modal show={showModal} onClose={() => setShowModal(false)} message={message} />}
         </div>
       </div>
     </>

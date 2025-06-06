@@ -75,7 +75,7 @@ export default function Sidebar() {
                 </li>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to="/datatransaksi" aria-expanded="true" aria-controls="collapsePages">
+                    <Link className="nav-link" to="/admin/data_transaksi" aria-expanded="true" aria-controls="collapsePages">
                         <i className="fas fa-fw fa-folder"></i>
                         <span>Data Transaksi</span>
                     </Link>

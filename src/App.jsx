@@ -20,6 +20,7 @@ import PesanPages from './pages/Customer/Pesan'
 import BookingAdminPages from './pages/Admin/DataBooking/IndexBooking'
 import BookingPages from './pages/Customer/Booking'
 import ListBookingPages from './pages/Customer/ListBooking'
+import DataTransaksiAdminPages from './pages/Admin/Data Transaksi/IndexDataTransaksi'
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
         <Route path='/admin/tambah_data_aksesoris' element={<FormTambahAksesoris/>}></Route>
         <Route path='/admin/ubah_data_aksesoris/:id_aksesoris' element={<FormUbahAksesoris/>}></Route>
         <Route path='/admin/data_booking_admin' element={<BookingAdminPages/>}></Route>
+        <Route path='/admin/data_transaksi' element={<DataTransaksiAdminPages/>}></Route>
         <Route path='/dashboardcustomer' element={<DashboardCustomerPages/>}></Route>
         <Route path='/customer/akun' element={<ProfilPages/>}></Route>
         <Route path='/customer/produk' element={<ProductsPages/>}></Route>
@@ -46,7 +48,7 @@ function App() {
         <Route path='/detailproduct/:id_konsol' element={<DetailProdukPages/>}></Route>
         <Route path='/detailaksesoris/:id_aksesoris' element={<DetailAksesorisPages/>}></Route>
         <Route path='/booking/:id_konsol' element={<BookingPages/>}></Route>
-        <Route path='/customer/pesanan' element={<PesanPages/>}></Route>
+        <Route path='/customer/order' element={<PesanPages/>}></Route>
         <Route path='/customer/listbooking' element={<ListBookingPages/>}></Route>
       </Routes>
     </BrowserRouter>

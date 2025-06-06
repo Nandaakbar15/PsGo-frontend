@@ -61,7 +61,7 @@ export default function CardDetailProduct() {
                     </div>
                 </div>
 
-                <Link to="/customer/booking" className="btn btn-primary mt-3 ms-2">Pesan Sekarang</Link>
+                <Link to="/customer/booking" className="btn btn-primary mt-3 ms-2">Booking sekarang!</Link>
             </div>
         </div>
         <Link to="/customer/produk">

@@ -131,7 +131,7 @@ export default function DataAksesorisAdmin() {
                             <button 
                                 className="btn btn-outline-primary mx-2"
                                 disabled={pagination.current_page === pagination.last_page}
-                                    nClick={() => getAllAksesoris(pagination.current_page + 1)}
+                                    onClick={() => getAllAksesoris(pagination.current_page + 1)}
                             >
                                 Next
                             </button>

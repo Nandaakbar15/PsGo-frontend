@@ -57,3 +57,11 @@ export function BtnBack() {
         </div>
     );
 }
+
+export function BtnCancel({onClick}) {
+    return (
+        <div className="button-cancel">
+            <button className="btn btn-danger" onClick={onClick}>Cancel!</button>
+        </div>
+    );
+}

@@ -51,7 +51,7 @@ export default function CardsProduct() {
                 <div className="card-body">
                   <h5 className="card-title">{product.name}</h5>
                   <p className="card-text">Tarif Perjam: Rp. {product.hourly_rate.toLocaleString('id-ID')}</p>
-                  <Link to={`/booking/${product.id_konsol}`} className="btn btn-primary w-100">Pesan</Link>
+                  <Link to={`/booking/${product.id_konsol}`} className="btn btn-primary w-100">Booking sekarang!</Link>
                 </div>
               </div>
             </div>
