@@ -61,7 +61,23 @@ export function BtnBack() {
 export function BtnCancel({onClick}) {
     return (
         <div className="button-cancel">
-            <button className="btn btn-danger" onClick={onClick}>Cancel!</button>
+            <button className="btn btn-danger" onClick={onClick}>Cancel</button>
+        </div>
+    );
+}
+
+export function BtnCheckOut({onClick}) {
+    return (
+        <div className="button-checkout">
+            <button className="btn btn-warning" onClick={onClick}>Check Out</button>
+        </div>
+    );
+}
+
+export function BtnCancelOrder({onClick}) {
+    return (
+        <div className="button-cancelOrder">
+            <button className="btn btn-danger" onClick={onClick}>Batalkan pesanan</button>
         </div>
     );
 }

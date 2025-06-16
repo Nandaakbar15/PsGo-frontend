@@ -5,10 +5,11 @@ import CustomerNavbar from "../../components/NavBarCustomer";
 import axios from "axios";
 import { useParams } from "react-router";
 import { BtnCancel } from "../../components/Button";
+import Modal from "../../components/Modal";
 
 export default function ListBookingPages() {
     const [bookings, setBookings] = useState([]);
-    const {id_booking} = useParams();
+    // const {id_booking} = useParams();
     const [showModal, setShowModal] = useState(false);
     const [message, setMessage] = useState("");
 
@@ -16,7 +17,7 @@ export default function ListBookingPages() {
         try {
             const token = localStorage.getItem("token");
             
-            console.log("Token : ", token);
+            // console.log("Token : ", token);
 
             const response = await axios.get("http://127.0.0.1:8000/api/customer/getBooking", {
                 headers: {
@@ -30,10 +31,10 @@ export default function ListBookingPages() {
         }
     }
 
-    const cancelBooking = async() => {
+    const cancelBooking = async(id_booking) => {
         try {
-            const token = localStorage.token("token");
-            const response = await axios.delete(`http://127.0.0.1:8000/api/customer/cancel-booking/${id_booking}`, {
+            const token = localStorage.getItem("token");
+            const response = await axios.delete(`http://127.0.0.1:8000/api/customer/cancelBooking/${id_booking}`, {
                 headers: {
                     Authorization : `Bearer ${token}`
                 }
@@ -49,7 +50,10 @@ export default function ListBookingPages() {
                 setShowModal(false);
             }, 2000);
         } catch(error) {
-            console.error("Error");
+            console.error("Error", error);
+            console.error("Detail Error : ", error.response?.data);
+            setMessage("Gagal cancel booking");
+            setShowModal(true);
         }
     }
 

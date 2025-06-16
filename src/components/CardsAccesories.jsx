@@ -62,6 +62,8 @@ export default function CardsAccesories() {
 
     } catch (error) {
       console.error("Gagal membuat pesanan: ", error);
+      // console.error("Gagal membuat pesanan: ", error);
+      console.log("Detail error:", error.response?.data);
       setShowModal(true);
       setMessage("Gagal membuat pesanan!");
     }
@@ -87,9 +89,9 @@ export default function CardsAccesories() {
                   />
                 </Link>
                 <div className="card-body">
-                  <h5 className="card-title">{aksesoris.nama_aksesoris}</h5>
-                  <p className="card-text">Harga: Rp. {aksesoris.harga}</p>
-                  <p className="card-text">Stok: {aksesoris.stok}</p>
+                  <h5 className="card-title" onChange={() => setAccesories(aksesoris.nama_aksesoris)}>{aksesoris.nama_aksesoris}</h5>
+                  <p className="card-text" onChange={() => setAccesories(aksesoris.harga)}>Harga: Rp. {aksesoris.harga}</p>
+                  <p className="card-text" onChange={() => setAccesories(aksesoris.stok)}>Stok: {aksesoris.stok}</p>
                   <button className='btn btn-success w-100' onClick={() => handleOrder(aksesoris)}>Pesan!</button>
                 </div>
               </div>
